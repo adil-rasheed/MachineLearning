@@ -83,7 +83,7 @@ def predictOneVsAll(all_theta, X):
   
 input_layer_size = 400
 num_labels = 10
-data = scipy.io.loadmat('ex3data1.mat')
+data = scipy.io.loadmat('hand_written_numbers.mat')
 X=data["X"]
 y=data["y"]
 m,n=X.shape
@@ -106,6 +106,18 @@ print('Training Set Accuracy for 7:  {:f}'.format(np.mean(pred[3500:4000] == y.f
 print('Training Set Accuracy for 8:  {:f}'.format(np.mean(pred[4000:4500] == y.flatten()[4000:4500]%10) * 100))
 print('Training Set Accuracy for 9:  {:f}'.format(np.mean(pred[4500:5000] == y.flatten()[4500:5000]%10) * 100))
 print('Training Set Accuracy for 10: {:f}'.format(np.mean(pred[0:500]     == y.flatten()[0:500]%10)     * 100))
+
+#Randomize all the digits
+rand_indices = np.random.permutation(m)
+random_X = X[rand_indices[:m],:]
+random_y = y[rand_indices[:m]]
+
+num_digit=int(input("Input the index of the random image you want to predict "))
+pred1=predictOneVsAll(all_theta, random_X[num_digit,:].reshape(1,-1))
+print("Predicted digit ", pred1)
+print("Actual digit ",random_y[num_digit])
+plt.imshow((random_X[num_digit,:].reshape(20,20)).T)
+plt.show()
 
 
 
