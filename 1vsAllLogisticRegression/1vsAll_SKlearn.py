@@ -61,5 +61,30 @@ displayData(random_images)
 logreg = linear_model.LogisticRegression(C=1e5)
 logreg.fit(X, y)
 
+pred = logreg.predict(X);
+print('Training Set Accuracy: {:f}'.format((np.mean(pred == y%10)*100)));
+print('Training Set Accuracy for 1:  {:f}'.format(np.mean(pred[500:1000]  == y.flatten()[500:1000]%10)  * 100));
+print('Training Set Accuracy for 2:  {:f}'.format(np.mean(pred[1000:1500] == y.flatten()[1000:1500]%10) * 100));
+print('Training Set Accuracy for 3:  {:f}'.format(np.mean(pred[1500:2000] == y.flatten()[1500:2000]%10) * 100));
+print('Training Set Accuracy for 4:  {:f}'.format(np.mean(pred[2000:2500] == y.flatten()[2000:2500]%10) * 100));
+print('Training Set Accuracy for 5:  {:f}'.format(np.mean(pred[2500:3000] == y.flatten()[2500:3000]%10) * 100));
+print('Training Set Accuracy for 6:  {:f}'.format(np.mean(pred[3000:3500] == y.flatten()[3000:3500]%10) * 100));
+print('Training Set Accuracy for 7:  {:f}'.format(np.mean(pred[3500:4000] == y.flatten()[3500:4000]%10) * 100));
+print('Training Set Accuracy for 8:  {:f}'.format(np.mean(pred[4000:4500] == y.flatten()[4000:4500]%10) * 100));
+print('Training Set Accuracy for 9:  {:f}'.format(np.mean(pred[4500:5000] == y.flatten()[4500:5000]%10) * 100));
+print('Training Set Accuracy for 10: {:f}'.format(np.mean(pred[0:500]     == y.flatten()[0:500]%10)     * 100));
+
+#Randomize all the digits
+rand_indices = np.random.permutation(m)
+random_X = X[rand_indices[:m],:]
+random_y = y[rand_indices[:m]]
+num_digit=int(input("Input the index of the random image you want to predict "))
+pred1=logreg.predict(random_X[num_digit,:].reshape(1,-1))
+print("Predicted digit ", pred1)
+print("Actual digit ",random_y[num_digit])
+plt.imshow((random_X[num_digit,:].reshape(20,20)).T)
+plt.show()
+
+
 
 
